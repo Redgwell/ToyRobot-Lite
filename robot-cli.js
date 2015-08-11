@@ -1,4 +1,7 @@
+'use strict';
+
 var prompt = require('cli-input');
+var interpreter = require('./interpreter');
 
 var ps = prompt({
   infinite: true,
@@ -6,8 +9,10 @@ var ps = prompt({
 });
 
 ps.on('value', function(value, options, ps) {
-  // do something with value
-  console.log('you entered:', value);
+  var result = interpreter.handleCommand(value.join(' '));
+  if (result) {
+    console.log(result);
+  }
 });
 
 console.log('Please enter some toy-robot commands:');
