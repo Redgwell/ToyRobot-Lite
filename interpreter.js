@@ -26,25 +26,20 @@ function place(commandArgs) {
 }
 
 function move() {
+  return _robot ? _robot.move() : null;
 }
 
 function left() {
+  return _robot ? _robot.rotateLeft() : null;
 }
 
 function right() {
+  return _robot ? _robot.rotateRight() : null;
 }
 
 function report() {
-  if (!_robot) {
-    return;
-  }
-
-  return _robot.getPositionReport();
+  return _robot ? _robot.getPositionReport() : null;
 }
-
-// MOVE
-// LEFT
-// RIGHT
 
 module.exports = {
   reset: function() {
@@ -69,6 +64,12 @@ module.exports = {
         return place(commandArgs);
       case 'REPORT':
         return report();
+      case 'MOVE':
+        return move();
+      case 'LEFT':
+        return left();
+      case 'RIGHT':
+        return right();
     }
   }
 }

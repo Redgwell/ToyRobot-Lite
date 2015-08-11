@@ -76,4 +76,70 @@ describe('handleCommand', function() {
     });
   });
 
+  describe('move', function() {
+
+    beforeEach(function() { interpreter.reset(); });
+
+    it('does nothing if the robot has not been placed', function() {
+      var result = interpreter.handleCommand('MOVE');
+      should(result).not.be.ok();
+    });
+
+    it('moves the robot if the robot has been placed', function() {
+      interpreter.handleCommand('PLACE 1,2,WEST');
+      interpreter.handleCommand('MOVE');
+
+      var robot = interpreter.getRobot();
+      should(robot).be.ok();
+      robot.should.have.property('x', 0);
+      robot.should.have.property('y', 2);
+      robot.should.have.property('direction', 'WEST');
+    });
+
+  });
+
+  describe('left', function() {
+
+    beforeEach(function() { interpreter.reset(); });
+
+    it('does nothing if the robot has not been placed', function() {
+      var result = interpreter.handleCommand('LEFT');
+      should(result).not.be.ok();
+    });
+
+    it('rotates the robot left if the robot has been placed', function() {
+      interpreter.handleCommand('PLACE 1,2,WEST');
+      interpreter.handleCommand('LEFT');
+
+      var robot = interpreter.getRobot();
+      should(robot).be.ok();
+      robot.should.have.property('x', 1);
+      robot.should.have.property('y', 2);
+      robot.should.have.property('direction', 'SOUTH');
+    });
+
+  });
+
+  describe('right', function() {
+
+    beforeEach(function() { interpreter.reset(); });
+
+    it('does nothing if the robot has not been placed', function() {
+      var result = interpreter.handleCommand('RIGHT');
+      should(result).not.be.ok();
+    });
+
+    it('rotates the robot right if the robot has been placed', function() {
+      interpreter.handleCommand('PLACE 1,2,NORTH');
+      interpreter.handleCommand('RIGHT');
+
+      var robot = interpreter.getRobot();
+      should(robot).be.ok();
+      robot.should.have.property('x', 1);
+      robot.should.have.property('y', 2);
+      robot.should.have.property('direction', 'EAST');
+    });
+
+  });
+
 });
