@@ -15,16 +15,16 @@ describe('init', function() {
 describe('setDirection', function() {
   it('sets direction when valid values are specified', function() {
     var model = new robotModel();
-    model.setDirection('North');
+    model.setDirection('North').should.equal(true);
     model.direction.should.equal('NORTH');
 
-    model.setDirection('South');
+    model.setDirection('South').should.equal(true);
     model.direction.should.equal('SOUTH');
 
-    model.setDirection('East');
+    model.setDirection('East').should.equal(true);
     model.direction.should.equal('EAST');
 
-    model.setDirection('West');
+    model.setDirection('West').should.equal(true);
     model.direction.should.equal('WEST');
   });
 
@@ -32,13 +32,13 @@ describe('setDirection', function() {
     var model = new robotModel();
     model.setDirection('EAST'); // set a valid non-north value initially
 
-    model.setDirection();
+    model.setDirection().should.equal(false);
     model.direction.should.equal('EAST');
 
-    model.setDirection(0);
+    model.setDirection(0).should.equal(false);
     model.direction.should.equal('EAST');
 
-    model.setDirection('124fqwf3');
+    model.setDirection('124fqwf3').should.equal(false);
     model.direction.should.equal('EAST');
   });
 });
